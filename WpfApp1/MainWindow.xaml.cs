@@ -25,7 +25,7 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
-           DataGridView.RowBackground
+            //DataGridView.RowBackground;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
