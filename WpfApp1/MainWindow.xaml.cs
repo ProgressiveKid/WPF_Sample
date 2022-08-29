@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
 
 
 
@@ -25,16 +26,18 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
-           DataGridView.RowBackground
+            //DataGridView.RowBackground;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            ReaderFromJson readerFromJson = new ReaderFromJson();
+        
             User user = new User();
 
-            MessageBox.Show("Jope");
+            MessageBox.Show(readerFromJson.ReadFromFile());
             TextBox1.Text = "Button has been pressed";
-            
+            MessageBox.Show((string)readerFromJson.ReadFromJsonFile());
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
