@@ -43,7 +43,7 @@ namespace WpfApp1
 
 
             }
-            //MessageBox.Show((string)readerFromJson.ReadFromJsonFile());
+            MessageBox.Show(Convert.ToString(readerFromJson.aaa));
         }
         
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

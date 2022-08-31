@@ -10,7 +10,7 @@ namespace WpfApp1
 {
     internal class ReaderFromJson
     {
-        public readonly string path = "JSON\\";
+        public readonly string path = @"JSON/";
         public string ReadFromFile()
         {
             string a = "";
@@ -36,19 +36,32 @@ namespace WpfApp1
 
       
         public static List<User> people;
+        public int aaa = 0;
         public List<User> ReadFromJsonFile()
         {
-            List<User> BigUser;
+            //List<User>  = people; ;
+            List<User> BigUser = new List<User>();
             string[] files = Directory.GetFiles(path);
-            foreach (var document in files)
+         
+            foreach (string document in files)
             {
-                using (StreamReader file = File.OpenText(document))
+                foreach (var line in document)
                 {
+                    using (StreamReader file = File.OpenText(document))
+                    {
 
-                    JsonSerializer serializer = new JsonSerializer();
-                    people = (List<User>)serializer.Deserialize(file, typeof(List<User>));
-                   // BigUser.Add(people);
+                        JsonSerializer serializer = new JsonSerializer();
+                        people = (List<User>)serializer.Deserialize(file, typeof(List<User>));
+                        // BigUser.Add(people);
+                        aaa++;
+                    }
+
+
+
+
                 }
+                
+              
 
             }
                 //using (StreamReader file = File.OpenText(@"JSON/day1.json"))
