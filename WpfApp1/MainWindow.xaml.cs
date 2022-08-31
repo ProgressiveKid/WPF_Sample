@@ -32,12 +32,13 @@ namespace WpfApp1
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ReaderFromJson readerFromJson = new ReaderFromJson();
-        
-            User user = new User();
-
-            MessageBox.Show(readerFromJson.ReadFromFile());
-            TextBox1.Text = "Button has been pressed";
-            MessageBox.Show((string)readerFromJson.ReadFromJsonFile());
+           List <User> listPeople = readerFromJson.ReadFromJsonFile(); // Синициализировали JSON файл в List <User>
+            TextBox1.Text = "Your effort will pay off";
+            foreach (var lineTable in listPeople)
+            { 
+            lineTable.Rank
+            }
+            //MessageBox.Show((string)readerFromJson.ReadFromJsonFile());
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
