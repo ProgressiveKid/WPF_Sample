@@ -34,40 +34,25 @@ namespace WpfApp1
             return Convert.ToString(a+ab);
         }
 
-       /* public string ReadFromJsonFile()
-        {
-            string[] files = Directory.GetFiles(path);
-
-
-            List <User> people;
-
-            using (StreamReader file = File.OpenText(@"JSON/day1.json"))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                people = (List<User>)serializer.Deserialize(file, typeof(List<User>));
-            }
-            int ad = 0;
-            
-            foreach (var lines in people)
-            {
-                ad+= lines.Steps;
-                
-
-            }
-            string a = "seccusese";
-            return a+ad;
-            //  return sbyte;
-        }
-       */
+      
         public static List<User> people;
         public List<User> ReadFromJsonFile()
         {
+            List<User> BigUser;
             string[] files = Directory.GetFiles(path);
-            using (StreamReader file = File.OpenText(@"JSON/day1.json"))
+            foreach (var document in files)
             {
-                JsonSerializer serializer = new JsonSerializer();
-                people = (List<User>)serializer.Deserialize(file, typeof(List<User>));
-            }           
+                using (StreamReader file = File.OpenText(document))
+                {
+
+                    JsonSerializer serializer = new JsonSerializer();
+                    people = (List<User>)serializer.Deserialize(file, typeof(List<User>));
+                   // BigUser.Add(people);
+                }
+
+            }
+                //using (StreamReader file = File.OpenText(@"JSON/day1.json"))
+           
             return people;         
         }
     }
