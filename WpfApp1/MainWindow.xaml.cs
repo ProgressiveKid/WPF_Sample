@@ -26,24 +26,37 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
-            //DataGridView.RowBackground;
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ReaderFromJson readerFromJson = new ReaderFromJson();
            List <User> listPeople = readerFromJson.ReadFromJsonFile(); // Синициализировали JSON файл в List <User>
-            TextBox1.Text = "Your effort will pay off";
+            TextBox1.Text = "Your effort will pay off";          
             foreach (var lineTable in listPeople)
-            { 
-            lineTable.Rank
+            {
+                string a = "asdasd";
+
+                //DataGridView
+
+
+
             }
             //MessageBox.Show((string)readerFromJson.ReadFromJsonFile());
         }
-
+        
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //DataGridView.Columns.Add("newColumnName", "Column Name in Text");
+        }
 
+        private void DataGridView_Loaded(object sender, RoutedEventArgs e)
+        {
+            ReaderFromJson readerFromJson = new ReaderFromJson();
+            List<User> listPeople = readerFromJson.ReadFromJsonFile();
+
+            DataGridView.ItemsSource = listPeople;
         }
     }
 }

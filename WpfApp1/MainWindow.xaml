@@ -1,16 +1,18 @@
-﻿<Window x:Class="WpfApp1.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
+        xmlns:Json="clr-namespace:Newtonsoft.Json;assembly=Newtonsoft.Json" x:Class="WpfApp1.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button x:Name="SoloUserButton" Content="Добавить пользователя " HorizontalAlignment="Left" Margin="638,36,0,0" VerticalAlignment="Top" Click="Button_Click" RenderTransformOrigin="-0.072,-0.499"/>
         <TextBlock x:Name="TextBox1" HorizontalAlignment="Left" Margin="665,129,0,0" TextWrapping="Wrap" Text="Text is here suck" VerticalAlignment="Top"/>
         <Button x:Name="JsonButton" Content="Добавить пользователя списком" HorizontalAlignment="Left" Margin="594,77,0,0" VerticalAlignment="Top" Click="Button_Click" RenderTransformOrigin="-0.072,-0.499"/>
-        <DataGrid x:Name="DataGridView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,36,358,36" SelectionChanged="DataGrid_SelectionChanged"/>
+        <DataGrid x:Name="DataGridView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,36,358,36" SelectionChanged="DataGrid_SelectionChanged" Loaded="DataGridView_Loaded"/>
 
     </Grid>
+
 </Window>

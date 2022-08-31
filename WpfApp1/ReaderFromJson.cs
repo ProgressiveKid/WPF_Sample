@@ -63,25 +63,12 @@ namespace WpfApp1
         public List<User> ReadFromJsonFile()
         {
             string[] files = Directory.GetFiles(path);
-
-
-           
-
             using (StreamReader file = File.OpenText(@"JSON/day1.json"))
             {
                 JsonSerializer serializer = new JsonSerializer();
                 people = (List<User>)serializer.Deserialize(file, typeof(List<User>));
-            }
-            int ad = 0;
-            
-            foreach (var lines in people)
-            {
-                ad+= lines.Steps;
-                
-
             }           
-            return people;
-            //  return sbyte;
+            return people;         
         }
     }
 }
