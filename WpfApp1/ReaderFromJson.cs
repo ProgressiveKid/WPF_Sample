@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
 
+
+
 namespace WpfApp1
 {
     internal class ReaderFromJson
@@ -36,9 +38,10 @@ namespace WpfApp1
 
       
         public static List<User> people;
-        public List<User> ReadFromJsonFile()
+       // public static List<User> BigUser;
+        public List<User> ReadFromJsonFile() 
         {
-            List<User> BigUser;
+            List<User> BigUser = new List<User>();
             string[] files = Directory.GetFiles(path);
             foreach (var document in files)
             {
@@ -47,13 +50,41 @@ namespace WpfApp1
 
                     JsonSerializer serializer = new JsonSerializer();
                     people = (List<User>)serializer.Deserialize(file, typeof(List<User>));
-                   // BigUser.Add(people);
+                    foreach (var ass in people)
+                    {
+                        BigUser.Add(ass);
+                    }
                 }
 
             }
                 //using (StreamReader file = File.OpenText(@"JSON/day1.json"))
            
-            return people;         
+            return BigUser;         
+        } public void ReadFromJsonFile(User user)
+        {
+            
+            // BigUser.Add(people);
+            string[] files = Directory.GetFiles(path);
+            foreach (string document in files)
+            {
+                using (StreamReader file = File.OpenText(document))
+                {
+                    string readerFromJsonFile = File.ReadAllText(document);
+                   
+                    //user = JsonSerializer.Deserialize<User>(readerFromJsonFile);
+                    // BigUser.Add(people);
+                }
+
+            }
+                
+           
+                   
+        }
+
+        public void ProvideFromJSON()
+        {
+            
+        
         }
     }
 }

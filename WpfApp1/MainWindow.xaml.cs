@@ -29,34 +29,74 @@ namespace WpfApp1
             
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+      private void Button_Click(object sender, RoutedEventArgs e)
         {
             ReaderFromJson readerFromJson = new ReaderFromJson();
-           List <User> listPeople = readerFromJson.ReadFromJsonFile(); // Синициализировали JSON файл в List <User>
-            TextBox1.Text = "Your effort will pay off";          
-            foreach (var lineTable in listPeople)
-            {
-                string a = "asdasd";
-
-                //DataGridView
-
-
-
-            }
+           
+          
             //MessageBox.Show((string)readerFromJson.ReadFromJsonFile());
         }
-        
+       
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //DataGridView.Columns.Add("newColumnName", "Column Name in Text");
         }
+        private List<User> ProcessingData()
+        {
+            ReaderFromJson readerFromJson = new ReaderFromJson();
+            List<User> BigUser = readerFromJson.ReadFromJsonFile();
+            List<UserInTable> userInTables = new List<UserInTable>();
+            List<User> NewBigUser = BigUser;
+            foreach (User Data in BigUser)
+            {
 
+                List<User> result = Data.GroupBy(x => x)
+                         .Where(g => g.Count() > 1)
+                         .Select(x => x.Key)
+                         .ToList();
+                string nameForSearch = Data.UserName;
+
+              // как сделать так чтобы все значения объеденились
+                //в одно и все вхождения в эжто значения ссумировались
+
+                /*
+                //string name = BigUser.FindAll(Data);
+                if (BigUser.Contains(Data) && )
+                {
+                }
+                else
+                {
+                    new UserInTable()
+                    {
+                        UserName = Data.UserName
+                    };                 
+                                      //BigUser.Add(Data);
+            
+                }
+                */
+                if (nameForSearch == NewBigUser)
+                {
+                
+                
+                }
+
+
+
+            
+            }
+
+
+
+            return BigUser;
+        }
         private void DataGridView_Loaded(object sender, RoutedEventArgs e)
         {
             ReaderFromJson readerFromJson = new ReaderFromJson();
             List<User> listPeople = readerFromJson.ReadFromJsonFile();
-
+            listPeople.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
             DataGridView.ItemsSource = listPeople;
         }
+
+     
     }
 }
