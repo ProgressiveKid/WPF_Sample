@@ -41,60 +41,54 @@ namespace WpfApp1
         {
             //DataGridView.Columns.Add("newColumnName", "Column Name in Text");
         }
-        private List<User> ProcessingData()
+        private List<UserInTable> ProcessingData()
         {
             ReaderFromJson readerFromJson = new ReaderFromJson();
             List<User> BigUser = readerFromJson.ReadFromJsonFile();
             List<UserInTable> userInTables = new List<UserInTable>();
             List<User> NewBigUser = BigUser;
-            foreach (User Data in BigUser)
+            int count = 0;
+            for (int i = 0; i < BigUser.Count; i++)
             {
-
-                List<User> result = Data.GroupBy(x => x)
-                         .Where(g => g.Count() > 1)
-                         .Select(x => x.Key)
-                         .ToList();
-                string nameForSearch = Data.UserName;
-
-              // как сделать так чтобы все значения объеденились
-                //в одно и все вхождения в эжто значения ссумировались
-
-                /*
-                //string name = BigUser.FindAll(Data);
-                if (BigUser.Contains(Data) && )
+                //Если элемент уже входит в userInTable
+                if (userInTables[i].UserName == BigUser[i].UserName)
                 {
+                    userInTables[count].CountDay = count++;
+
                 }
-                else
+                else // Если не входит 
                 {
-                    new UserInTable()
-                    {
-                        UserName = Data.UserName
-                    };                 
-                                      //BigUser.Add(Data);
-            
+
+                    userInTables[count].UserName = BigUser[i].UserName;
+                    userInTables[count].CountDay = count++;
+
+                   
+
                 }
-                */
-                if (nameForSearch == NewBigUser)
-                {
-                
-                
-                }
+                count++;
 
-
-
-            
             }
-
-
-
-            return BigUser;
+          
+            return userInTables;
         }
         private void DataGridView_Loaded(object sender, RoutedEventArgs e)
         {
             ReaderFromJson readerFromJson = new ReaderFromJson();
-            List<User> listPeople = readerFromJson.ReadFromJsonFile();
-            listPeople.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
-            DataGridView.ItemsSource = listPeople;
+             List<User> listPeople = readerFromJson.ReadFromJsonFile();
+            //List <UserInTable> listPeople = ProcessingData();
+            // listPeople.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
+           // var uniq = listPeople.Distinct();
+            List <string> ArrayName = new List<string>();
+            int countArray = 0;
+            foreach (User Data in listPeople)
+            {
+                ArrayName[countArray] = (string)Data.UserName;
+                countArray++;
+
+
+            }       
+            //var uniq = ArrayName.Distinct();
+            DataGridView.ItemsSource = ArrayName;
         }
 
      
