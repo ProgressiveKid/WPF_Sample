@@ -78,17 +78,8 @@ namespace WpfApp1
             //List <UserInTable> listPeople = ProcessingData();
             // listPeople.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
            // var uniq = listPeople.Distinct();
-            List <string> ArrayName = new List<string>();
-            int countArray = 0;
-            foreach (User Data in listPeople)
-            {
-                ArrayName[countArray] = (string)Data.UserName;
-                countArray++;
-
-
-            }       
-            //var uniq = ArrayName.Distinct();
-            DataGridView.ItemsSource = ArrayName;
+            
+            DataGridView.ItemsSource = listPeople;
         }
 
      

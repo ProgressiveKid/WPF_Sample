@@ -55,10 +55,42 @@ namespace WpfApp1
                         BigUser.Add(ass);
                     }
                 }
+                
+            } // Сформировали из JSON List<User>
+              //using (StreamReader file = File.OpenText(@"JSON/day1.json"))
+       
+            List<string> name = new List<string>();
+            List<User> BigUser1 = new List<User>();
+            foreach (User user in BigUser)
+            {
+                name.Add(user.UserName);
+            
+            } // Сформировали лист только из названии
+            var nameWithoutRepetition = name.Distinct(); // Убрали повторяющиеся имена
+            nameWithoutRepetition.ToList();
+            foreach (User user1 in BigUser1)
+            {
+                
+                foreach (string A in user1.UserName)
+                {
+                    BigUser1.Add(A);
+                    if (user1.UserName == A)
+                    {
+
+
+                    }
+                    else
+                    { 
+                    
+                    
+                    }
+
+
+                }
+               
 
             }
-                //using (StreamReader file = File.OpenText(@"JSON/day1.json"))
-           
+
             return BigUser;         
         } public void ReadFromJsonFile(User user)
         {
