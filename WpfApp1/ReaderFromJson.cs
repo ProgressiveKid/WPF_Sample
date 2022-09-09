@@ -38,8 +38,9 @@ namespace WpfApp1
 
       
         public static List<User> people;
-       // public static List<User> BigUser;
-        public List<User> ReadFromJsonFile() 
+        public int message = 0;
+        // public static List<User> BigUser;
+        public List<UserInTable> ReadFromJsonFile()
         {
             List<User> BigUser = new List<User>();
             string[] files = Directory.GetFiles(path);
@@ -55,31 +56,46 @@ namespace WpfApp1
                         BigUser.Add(ass);
                     }
                 }
-                
+
             } // Сформировали из JSON List<User>
-              //using (StreamReader file = File.OpenText(@"JSON/day1.json"))
-       
+
+
             List<string> name = new List<string>();
-            List<User> BigUser1 = new List<User>();
+
             foreach (User user in BigUser)
             {
                 name.Add(user.UserName);
-            
+
             } // Сформировали лист только из названии
             var nameWithoutRepetition = name.Distinct(); // Убрали повторяющиеся имена
             nameWithoutRepetition.ToList();
-            foreach (User user1 in BigUser1)
-            {
+            List<UserInTable> userInTables = new List<UserInTable>();
+           
+                        foreach (var A in userInTables)
+                        {
                 
-                foreach (string A in user1.UserName)
-                {
-                    BigUser1.Add(A);
-                    if (user1.UserName == A)
-                    {
+                A.UserName = nameWithoutRepetition;
+            
+                        }
 
+
+            
+          
+            int count = 0;
+           
+            foreach (string namesss in nameWithoutRepetition)
+            {
+                //(namesss);
+               // userInTables[count].UserName = namesss;
+                foreach (User user1 in BigUser)
+                {
+                  
+                    if (namesss == user1.UserName) // Если такой человек нашёлся
+                    {
+                        //userInTables[count].SumStepsDay += user1.Steps; 
 
                     }
-                    else
+                    else // Если такой человек нашёлся в первые?
                     { 
                     
                     
@@ -87,11 +103,11 @@ namespace WpfApp1
 
 
                 }
-               
-
+                count++;
             }
+           
 
-            return BigUser;         
+            return userInTables;         
         } public void ReadFromJsonFile(User user)
         {
             

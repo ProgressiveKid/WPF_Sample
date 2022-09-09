@@ -31,9 +31,15 @@ namespace WpfApp1
 
       private void Button_Click(object sender, RoutedEventArgs e)
         {
+           // ReaderFromJson readerFromJson = new ReaderFromJson();
+          //  MessageBox.Show(Convert.ToString(readerFromJson.message));
             ReaderFromJson readerFromJson = new ReaderFromJson();
-           
-          
+            List<UserInTable> listPeople = readerFromJson.ReadFromJsonFile();
+            //List <UserInTable> listPeople = ProcessingData();
+            // listPeople.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
+            // var uniq = listPeople.Distinct();
+
+            DataGridView.ItemsSource = listPeople;
             //MessageBox.Show((string)readerFromJson.ReadFromJsonFile());
         }
        
@@ -44,9 +50,10 @@ namespace WpfApp1
         private List<UserInTable> ProcessingData()
         {
             ReaderFromJson readerFromJson = new ReaderFromJson();
-            List<User> BigUser = readerFromJson.ReadFromJsonFile();
+            // List<User> BigUser = readerFromJson.ReadFromJsonFile();
+            List<UserInTable> BigUser = readerFromJson.ReadFromJsonFile();
             List<UserInTable> userInTables = new List<UserInTable>();
-            List<User> NewBigUser = BigUser;
+          //  List<User> NewBigUser = BigUser;
             int count = 0;
             for (int i = 0; i < BigUser.Count; i++)
             {
@@ -74,7 +81,7 @@ namespace WpfApp1
         private void DataGridView_Loaded(object sender, RoutedEventArgs e)
         {
             ReaderFromJson readerFromJson = new ReaderFromJson();
-             List<User> listPeople = readerFromJson.ReadFromJsonFile();
+             List<UserInTable> listPeople = readerFromJson.ReadFromJsonFile();
             //List <UserInTable> listPeople = ProcessingData();
             // listPeople.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
            // var uniq = listPeople.Distinct();
