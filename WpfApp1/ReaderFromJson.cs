@@ -66,45 +66,64 @@ namespace WpfApp1
             {
                 name.Add(user.UserName);
 
+
             } // Сформировали лист только из названии
-            var nameWithoutRepetition = name.Distinct(); // Убрали повторяющиеся имена
-            nameWithoutRepetition.ToList();
+            List <string> nameWithoutRepetition = name.Distinct().ToList(); // Убрали повторяющиеся имена
+                                                                            // nameWithoutRepetition.ToArray();
             List<UserInTable> userInTables = new List<UserInTable>();
-           
-                        foreach (var A in userInTables)
-                        {
-                
-                A.UserName = nameWithoutRepetition;
             
-                        }
+            foreach (string a in nameWithoutRepetition)
+            {
+                List<UserInTable> userInTablesForAdd1 = new List<UserInTable>()
+                    {
+
+                new UserInTable
+                {
+                UserName = a,
+                 CountDay = 100,
+                SumStepsDay = 100,
+                  FinishSum = 100,
+               MaxSum = 100,
+             MinSum = 100,
+                }
+                };
+                userInTables.Add(userInTablesForAdd1[0]);
+            
+            } // Добавили в не повторяющиеся значения в новый лист объектов 
+          // --------------------------**Костыль ебаный!!!-----------
+            
+          
+
+            for (int i = 0; i < nameWithoutRepetition.Count(); i++)
+            {
+                string nameA = nameWithoutRepetition[i];
+                bool firstFind = false;
+                
+                foreach (User user in BigUser)
+                {
+                  
+                    if (nameA == user.UserName && firstFind == false)
+                    {
+                        userInTables[i].UserName = nameA;
+                        userInTables[i].CountDay = 1;
+                        userInTables[i].SumStepsDay = user.Steps;
+                        firstFind = true;
+                    }
+                    if (nameA == user.UserName && firstFind == true)
+                    {
+                        userInTables[i].CountDay++;
+                        userInTables[i].SumStepsDay += user.Steps;
+
+                    }
+
+                }
+            }
+                        
 
 
             
           
-            int count = 0;
-           
-            foreach (string namesss in nameWithoutRepetition)
-            {
-                //(namesss);
-               // userInTables[count].UserName = namesss;
-                foreach (User user1 in BigUser)
-                {
-                  
-                    if (namesss == user1.UserName) // Если такой человек нашёлся
-                    {
-                        //userInTables[count].SumStepsDay += user1.Steps; 
-
-                    }
-                    else // Если такой человек нашёлся в первые?
-                    { 
-                    
-                    
-                    }
-
-
-                }
-                count++;
-            }
+            
            
 
             return userInTables;         
