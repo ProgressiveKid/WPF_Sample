@@ -68,10 +68,10 @@ namespace WpfApp1
 
 
             } // Сформировали лист только из названии
-            List <string> nameWithoutRepetition = name.Distinct().ToList(); // Убрали повторяющиеся имена
-                                                                            // nameWithoutRepetition.ToArray();
+            List<string> nameWithoutRepetition = name.Distinct().ToList(); // Убрали повторяющиеся имена
+                                                                           // nameWithoutRepetition.ToArray();
             List<UserInTable> userInTables = new List<UserInTable>();
-            
+
             foreach (string a in nameWithoutRepetition)
             {
                 List<UserInTable> userInTablesForAdd1 = new List<UserInTable>()
@@ -83,50 +83,74 @@ namespace WpfApp1
                  CountDay = 100,
                 SumStepsDay = 100,
                   FinishSum = 100,
-               MaxSum = 100,
-             MinSum = 100,
+               MaxSum = 0,
+             MinSum = 0,
                 }
                 };
                 userInTables.Add(userInTablesForAdd1[0]);
-            
-            } // Добавили в не повторяющиеся значения в новый лист объектов 
-          // --------------------------**Костыль ебаный!!!-----------
-            
-          
 
-            for (int i = 0; i < nameWithoutRepetition.Count(); i++)
+            } // Добавили в не повторяющиеся значения в новый лист объектов 
+              // --------------------------**Костыль ебаный!!!-----------
+
+
+
+            for (int i = 0; i < nameWithoutRepetition.Count(); i++)  //Дополить логику минамального и максимального
             {
                 string nameA = nameWithoutRepetition[i];
                 bool firstFind = false;
-                
+                int max = 0;
+                int min = 0;
                 foreach (User user in BigUser)
                 {
-                  
+
                     if (nameA == user.UserName && firstFind == false)
                     {
                         userInTables[i].UserName = nameA;
                         userInTables[i].CountDay = 1;
-                        userInTables[i].SumStepsDay = user.Steps;
+                        userInTables[i].FinishSum = user.Steps;
+                        // userInTables[i].MinSum = 10000;
+                        //min = user.Steps;
                         firstFind = true;
                     }
                     if (nameA == user.UserName && firstFind == true)
                     {
                         userInTables[i].CountDay++;
-                        userInTables[i].SumStepsDay += user.Steps;
+                        userInTables[i].FinishSum += user.Steps;
+                        if (user.Steps < min)
+                        {
+                            min = user.Steps;
+                            userInTables[i].MinSum = min;
+
+                        }
+                        if (user.Steps > max)
+                        {
+                            max = user.Steps;
+                            userInTables[i].MaxSum = max;
+                        }
 
                     }
 
                 }
             }
-                        
+            for (int i = 0; i < nameWithoutRepetition.Count(); i++)
+            {
 
 
+            }
+            foreach (var user in userInTables)
+            {
+                user.SumStepsDay = user.FinishSum / user.CountDay;
             
-          
-            
-           
+            }
 
-            return userInTables;         
+
+
+
+
+
+
+
+                return userInTables;         
         } public void ReadFromJsonFile(User user)
         {
             

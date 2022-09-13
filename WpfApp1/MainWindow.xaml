@@ -11,7 +11,7 @@
         <Button x:Name="SoloUserButton" Content="Добавить пользователя " HorizontalAlignment="Left" Margin="638,36,0,0" VerticalAlignment="Top" Click="Button_Click" RenderTransformOrigin="-0.072,-0.499"/>
         <TextBlock x:Name="TextBox1" HorizontalAlignment="Left" Margin="665,129,0,0" TextWrapping="Wrap" Text="Text is here suck" VerticalAlignment="Top"/>
         <Button x:Name="JsonButton" Content="Добавить пользователя списком" HorizontalAlignment="Left" Margin="594,77,0,0" VerticalAlignment="Top" Click="Button_Click" RenderTransformOrigin="-0.072,-0.499"/>
-        <DataGrid x:Name="DataGridView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,36,358,36" SelectionChanged="DataGrid_SelectionChanged" Loaded="DataGridView_Loaded"/>
+        <DataGrid x:Name="DataGridView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,36,358,36" SelectionChanged="DataGrid_SelectionChanged" Loaded="DataGridView_Loaded" MouseDoubleClick="DataGridView_MouseDoubleClick"/>
 
     </Grid>
 

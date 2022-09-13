@@ -88,7 +88,11 @@ namespace WpfApp1
             
             DataGridView.ItemsSource = listPeople;
         }
-
-     
+       // public event System.Windows.Forms.DataGridViewCellEventHandler CellDoubleClick;
+        private void DataGridView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("");
+        }
+       
     }
 }
