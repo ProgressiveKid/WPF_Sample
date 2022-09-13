@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Newtonsoft.Json;
+using LiveCharts;
+using LiveCharts.Wpf;
 
 
 
@@ -23,10 +25,22 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+       public SeriesCollection SeriesCollection { get; }
+
         public MainWindow()
         {
             InitializeComponent();
-            
+            SeriesCollection = new SeriesCollection
+{
+    new LineSeries
+    {
+        Values = new ChartValues<double> { 3, 5, 7, 4 }
+    },
+    new ColumnSeries
+    {
+        Values = new ChartValues<decimal> { 5, 6, 2, 7 }
+    }
+};
         }
 
       private void Button_Click(object sender, RoutedEventArgs e)
@@ -93,6 +107,12 @@ namespace WpfApp1
         {
             MessageBox.Show("");
         }
-       
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            
+
+
+        }
     }
 }
