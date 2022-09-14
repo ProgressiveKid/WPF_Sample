@@ -28,18 +28,12 @@ namespace WpfApp1
                 {
                     
                 }
-
             }
-            else a = "lf";
-        
-          
+            else a = "lf";      
             return Convert.ToString(a+ab);
         }
-
-      
+   
         public static List<User> people;
-        public int message = 0;
-        // public static List<User> BigUser;
         public List<UserInTable> ReadFromJsonFile()
         {
             List<User> BigUser = new List<User>();
@@ -48,7 +42,6 @@ namespace WpfApp1
             {
                 using (StreamReader file = File.OpenText(document))
                 {
-
                     JsonSerializer serializer = new JsonSerializer();
                     people = (List<User>)serializer.Deserialize(file, typeof(List<User>));
                     foreach (var ass in people)
@@ -56,12 +49,9 @@ namespace WpfApp1
                         BigUser.Add(ass);
                     }
                 }
-
+    
             } // Сформировали из JSON List<User>
-
-
             List<string> name = new List<string>();
-
             foreach (User user in BigUser)
             {
                 name.Add(user.UserName);
@@ -75,16 +65,14 @@ namespace WpfApp1
             foreach (string a in nameWithoutRepetition)
             {
                 List<UserInTable> userInTablesForAdd1 = new List<UserInTable>()
-                    {
-
-                new UserInTable
+                    { new UserInTable
                 {
-                UserName = a,
-                 CountDay = 100,
-                SumStepsDay = 100,
-                  FinishSum = 100,
-               MaxSum = 0,
-             MinSum = 0,
+                    UserName = a,
+                    CountDay = 100,
+                    SumStepsDay = 100,
+                    FinishSum = 100,
+                    MaxSum = 0,
+                    MinSum = 0,
                 }
                 };
                 userInTables.Add(userInTablesForAdd1[0]);
@@ -130,7 +118,7 @@ namespace WpfApp1
 
                     }
 
-                }
+                } // заполнение нового листа для вывода в DGV
             }
             for (int i = 0; i < nameWithoutRepetition.Count(); i++)
             {
@@ -139,43 +127,9 @@ namespace WpfApp1
             }
             foreach (var user in userInTables)
             {
-                user.SumStepsDay = user.FinishSum / user.CountDay;
-            
-            }
-
-
-
-
-
-
-
-
+                user.SumStepsDay = user.FinishSum / user.CountDay;         
+            } // Подсчет средного количества пройденных шагов за день
                 return userInTables;         
-        } public void ReadFromJsonFile(User user)
-        {
-            
-            // BigUser.Add(people);
-            string[] files = Directory.GetFiles(path);
-            foreach (string document in files)
-            {
-                using (StreamReader file = File.OpenText(document))
-                {
-                    string readerFromJsonFile = File.ReadAllText(document);
-                   
-                    //user = JsonSerializer.Deserialize<User>(readerFromJsonFile);
-                    // BigUser.Add(people);
-                }
-
-            }
-                
-           
-                   
-        }
-
-        public void ProvideFromJSON()
-        {
-            
-        
-        }
+        }  
     }
 }

@@ -30,79 +30,29 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
-            SeriesCollection = new SeriesCollection
-{
-    new LineSeries
-    {
-        Values = new ChartValues<double> { 3, 5, 7, 4 }
-    },
-    new ColumnSeries
-    {
-        Values = new ChartValues<decimal> { 5, 6, 2, 7 }
-    }
-};
         }
+    
 
       private void Button_Click(object sender, RoutedEventArgs e)
         {
-           // ReaderFromJson readerFromJson = new ReaderFromJson();
-          //  MessageBox.Show(Convert.ToString(readerFromJson.message));
             ReaderFromJson readerFromJson = new ReaderFromJson();
-            List<UserInTable> listPeople = readerFromJson.ReadFromJsonFile();
-            //List <UserInTable> listPeople = ProcessingData();
-            // listPeople.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
-            // var uniq = listPeople.Distinct();
-
+            List<UserInTable> listPeople = readerFromJson.ReadFromJsonFile();          
             DataGridView.ItemsSource = listPeople;
-            //MessageBox.Show((string)readerFromJson.ReadFromJsonFile());
+        
         }
        
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //DataGridView.Columns.Add("newColumnName", "Column Name in Text");
         }
-        private List<UserInTable> ProcessingData()
-        {
-            ReaderFromJson readerFromJson = new ReaderFromJson();
-            // List<User> BigUser = readerFromJson.ReadFromJsonFile();
-            List<UserInTable> BigUser = readerFromJson.ReadFromJsonFile();
-            List<UserInTable> userInTables = new List<UserInTable>();
-          //  List<User> NewBigUser = BigUser;
-            int count = 0;
-            for (int i = 0; i < BigUser.Count; i++)
-            {
-                //Если элемент уже входит в userInTable
-                if (userInTables[i].UserName == BigUser[i].UserName)
-                {
-                    userInTables[count].CountDay = count++;
-
-                }
-                else // Если не входит 
-                {
-
-                    userInTables[count].UserName = BigUser[i].UserName;
-                    userInTables[count].CountDay = count++;
-
-                   
-
-                }
-                count++;
-
-            }
-          
-            return userInTables;
-        }
+       
         private void DataGridView_Loaded(object sender, RoutedEventArgs e)
         {
             ReaderFromJson readerFromJson = new ReaderFromJson();
              List<UserInTable> listPeople = readerFromJson.ReadFromJsonFile();
-            //List <UserInTable> listPeople = ProcessingData();
-            // listPeople.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
-           // var uniq = listPeople.Distinct();
-            
             DataGridView.ItemsSource = listPeople;
         }
-       // public event System.Windows.Forms.DataGridViewCellEventHandler CellDoubleClick;
+     
         private void DataGridView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             MessageBox.Show("");
