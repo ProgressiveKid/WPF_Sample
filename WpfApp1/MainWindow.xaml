@@ -7,7 +7,7 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:Json="clr-namespace:Newtonsoft.Json;assembly=Newtonsoft.Json" x:Class="WpfApp1.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="580" Width="861">
+        Title="MainWindow" Height="580" Width="861" Loaded="Window_Loaded">
     <Grid Margin="10,26,41,274">
         <Grid.RowDefinitions>
             <RowDefinition Height="4*"/>
@@ -17,7 +17,11 @@
         <TextBlock x:Name="TextBox1" HorizontalAlignment="Left" Margin="665,125,0,0" TextWrapping="Wrap" Text="Text is here suck" VerticalAlignment="Top" Grid.Row="1"/>
         <Button x:Name="JsonButton" Content="Добавить пользователя списком" HorizontalAlignment="Left" Margin="594,73,0,0" VerticalAlignment="Top" Click="Button_Click" RenderTransformOrigin="-0.072,-0.499" Grid.Row="1"/>
         <DataGrid x:Name="DataGridView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="42,30,346,10" SelectionChanged="DataGrid_SelectionChanged" Loaded="DataGridView_Loaded" MouseDoubleClick="DataGridView_MouseDoubleClick" Grid.Row="1"/>
-        <lvc:CartesianChart Grid.Row ="1" Series="{Binding SeriesCollection}" Margin="-1,285,1,-285" />
+        <lvc:CartesianChart x:Name="Chart" Grid.Row ="1" Series="{Binding SeriesCollection}" Margin="-1,285,1,-285" >
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis LabelFormatter="{Binding Formatter}"></lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+        </lvc:CartesianChart>
         <Button Content="Отобразить график" HorizontalAlignment="Left" Margin="619,201,0,0" Grid.Row="1" VerticalAlignment="Top" Click="Button_Click_1"/>
     </Grid>
 

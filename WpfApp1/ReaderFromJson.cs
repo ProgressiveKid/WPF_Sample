@@ -5,13 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
-
-
+using LiveCharts;
+using LiveCharts.Configurations;
+using LiveCharts.Wpf;
+using System.Windows.Media;
 
 namespace WpfApp1
 {
+  
     internal class ReaderFromJson
     {
+      
+     
+
         public readonly string path = "JSON\\";
         public string ReadFromFile()
         {

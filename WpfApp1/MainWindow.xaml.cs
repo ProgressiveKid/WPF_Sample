@@ -58,11 +58,43 @@ namespace WpfApp1
             MessageBox.Show("");
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e) // логика построения графика
         {
-            
-
-
+            ReaderFromJson readerFromJson = new ReaderFromJson();
+            // readerFromJson.ShowChart();
+            List <UserInTable> ChartList = readerFromJson.ReadFromJsonFile();
+            //Chart.Series.Clear();
+            SeriesCollection series = new SeriesCollection();
+            var years = (from o in ChartList as List<UserInTable> select new { years = o.CountDay }).Distinct();
+            foreach (var year in years)
+            {
+                List<double> values = new List<double>();
+                for (int i = 0; i < 10; i++)
+                {
+                    int iss = 5;
+                    values.Add(iss+i*0.3); 
+                
+                }
+                    series.Add(new LineSeries() { Title = year.years.ToString(), Values = new ChartValues<double>(values) });
+            }
+            Chart.Series = series;
+        }
+        // нужен метод который считыват строку выбирает от туда имя пользователя ищет его в бигюзере
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Chart.AxisX.Add(new LiveCharts.Wpf.Axis
+            {
+                Title = "Month",
+                Labels = new[] {"Jan","Feb", "Хочяеь 3 месяц", "4 сццц"}
+            }
+            );
+            Chart.AxisY.Add(new LiveCharts.Wpf.Axis
+            {
+                Title = "revenur",
+                LabelFormatter = value => value.ToString("C")
+            }
+            );
+            Chart.LegendLocation = LiveCharts.LegendLocation.Right;
         }
     }
 }
