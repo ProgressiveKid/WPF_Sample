@@ -18,6 +18,7 @@ using LiveCharts.Wpf;
 
 
 
+
 namespace WpfApp1
 {
     /// <summary>
@@ -38,15 +39,17 @@ namespace WpfApp1
             ReaderFromJson readerFromJson = new ReaderFromJson();
             List<UserInTable> listPeople = readerFromJson.ReadFromJsonFile();          
             DataGridView.ItemsSource = listPeople;
-        
+            //DataGridView.Row
         }
-       
+      
+
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //DataGridView.Columns.Add("newColumnName", "Column Name in Text");
         }
+
        
-        private void DataGridView_Loaded(object sender, RoutedEventArgs e)
+            private void DataGridView_Loaded(object sender, RoutedEventArgs e)
         {
             ReaderFromJson readerFromJson = new ReaderFromJson();
              List<UserInTable> listPeople = readerFromJson.ReadFromJsonFile();
@@ -55,7 +58,8 @@ namespace WpfApp1
      
         private void DataGridView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("");
+            // MessageBox.Show("");
+           
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e) // логика построения графика
@@ -79,7 +83,7 @@ namespace WpfApp1
             }
             Chart.Series = series;
         }
-        // нужен метод который считыват строку выбирает от туда имя пользователя ищет его в бигюзере
+        // нужен метод который считыват строку выбирает от туда имя пользователя ищет его в бигюзере потом идёт в метод на верху
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Chart.AxisX.Add(new LiveCharts.Wpf.Axis
@@ -96,5 +100,7 @@ namespace WpfApp1
             );
             Chart.LegendLocation = LiveCharts.LegendLocation.Right;
         }
+
+        
     }
 }
