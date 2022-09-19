@@ -15,34 +15,14 @@ namespace WpfApp1
   
     internal class ReaderFromJson
     {
-      
-     
-
         public readonly string path = "JSON\\";
-        public string ReadFromFile()
-        {
-            string a = "";
-            int ab = 1;
-            //string[] lines = File.ReadAllLines(path);
-            if (Directory.Exists(path))
-            {
-                List<User> ListUser = new List<User>();
-                User user = JsonConvert.DeserializeObject<User>(path);
-                a = "net";
-                string[] files = Directory.GetFiles(path);
-                foreach (string liness in files)
-                {
-                    
-                }
-            }
-            else a = "lf";      
-            return Convert.ToString(a+ab);
-        }
    
         public static List<User> people;
+        public static List<User> ListForGridView; //Лист для отображения графика на другой форме в методе ...
         public List<UserInTable> ReadFromJsonFile()
         {
             List<User> BigUser = new List<User>();
+            List<User> LocalUser = new List<User>();
             string[] files = Directory.GetFiles(path);
             foreach (var document in files)
             {
@@ -53,11 +33,13 @@ namespace WpfApp1
                     foreach (var ass in people)
                     {
                         BigUser.Add(ass);
+                        LocalUser.Add(ass);
                     }
                 }
     
             } // Сформировали из JSON List<User>
             List<string> name = new List<string>();
+            ListForGridView = LocalUser;
             foreach (User user in BigUser)
             {
                 name.Add(user.UserName);
@@ -126,11 +108,7 @@ namespace WpfApp1
 
                 } // заполнение нового листа для вывода в DGV
             }
-            for (int i = 0; i < nameWithoutRepetition.Count(); i++)
-            {
-
-
-            }
+      
             foreach (var user in userInTables)
             {
                 user.SumStepsDay = user.FinishSum / user.CountDay;         

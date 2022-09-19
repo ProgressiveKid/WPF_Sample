@@ -15,9 +15,8 @@ using System.Windows.Shapes;
 using Newtonsoft.Json;
 using LiveCharts;
 using LiveCharts.Wpf;
-
-
-
+using System.Reflection.Emit;
+using LiveCharts.Definitions.Charts;
 
 namespace WpfApp1
 {
@@ -31,6 +30,7 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
+           
         }
     
 
@@ -54,12 +54,38 @@ namespace WpfApp1
             ReaderFromJson readerFromJson = new ReaderFromJson();
              List<UserInTable> listPeople = readerFromJson.ReadFromJsonFile();
             DataGridView.ItemsSource = listPeople;
+           // DataGridView.Columns[0].HeaderText = "название столбца";
         }
-     
+
+        public int [] DataForChart()
+        {
+            UserInTable userInTable = (UserInTable)DataGridView.SelectedItem;
+            string nameFromGridView = userInTable.UserName;
+
+            ReaderFromJson readerFromJson = new ReaderFromJson();
+            var BigUser = readerFromJson.ReadFromJsonFile();
+            var ListForGrid = ReaderFromJson.ListForGridView; // Копия BigUser - лист со всеми значениями ищ папки JSON
+            int[] DayWithValue = new int[userInTable.CountDay];
+            int countDay = 0;
+            foreach (var Data in ListForGrid)
+            {
+                if (Data.UserName == nameFromGridView)
+                {
+                    DayWithValue[countDay] = Data.Steps;
+                    countDay++;
+                }
+            }
+            return DayWithValue;
+        }
+
         private void DataGridView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             // MessageBox.Show("");
-           
+
+
+            int[] ints = DataForChart();
+            int n = ints[4];
+            MessageBox.Show(Convert.ToString(n));
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e) // логика построения графика
@@ -86,18 +112,52 @@ namespace WpfApp1
         // нужен метод который считыват строку выбирает от туда имя пользователя ищет его в бигюзере потом идёт в метод на верху
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            /*
+            Chart.Series.Add(new VerticalLineSeries
+            {
+                Values = new ChartValues<double> { 3, 5, 2, 6, 2, 7, 1 }
+            });
+
+            Chart.Series.Add(new RowSeries
+            {
+                Values = new ChartValues<double> { 6, 2, 6, 3, 2, 7, 2 }
+            });
+
+            Chart.AxisY.Add(new Axis
+            {
+               // Separator = new Separator { Step = 1 }
+            });
+
+            Chart.AxisX.Add(new Axis
+            {
+                MinValue = 0
+            });
+
+            var tooltip = new DefaultTooltip
+            {
+                SelectionMode = TooltipSelectionMode.SharedYValues
+            };
+
+            Chart.DataTooltip = tooltip;
+            // int[] ints = DataForChart();
+            //int CountDay = ints.Count();
+            /*
             Chart.AxisX.Add(new LiveCharts.Wpf.Axis
             {
-                Title = "Month",
-                Labels = new[] {"Jan","Feb", "Хочяеь 3 месяц", "4 сццц"}
+                Title = "День",
+                
+                Labels = new[] {
+                 
+                    "Jan","Feb", "Хочяеь 3 месяц", "4 сццц"}
             }
             );
             Chart.AxisY.Add(new LiveCharts.Wpf.Axis
             {
-                Title = "revenur",
+                Title = "Значения",
                 LabelFormatter = value => value.ToString("C")
             }
             );
+            */
             Chart.LegendLocation = LiveCharts.LegendLocation.Right;
         }
 
